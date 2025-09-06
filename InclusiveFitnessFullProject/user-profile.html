@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Inclusive Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #f0f4f8;
+            color: #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+        }
+
+        nav a {
+            margin: 0 12px;
+            color: white;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            transform: scale(1.05);
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #4facfe;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .bookings {
+            margin-top: 25px;
+        }
+
+        .bookings h3 {
+            margin-bottom: 12px;
+            color: #43e97b;
+        }
+
+        .bookings ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .bookings ul li {
+            background: #f0f4f8;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .logout-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 28px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Inclusive Fitness</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="trainers.html">Trainers</a>
+            <a href="accessibility.html">Accessibility</a>
+            <a href="about.html">About</a>
+            <a href="user-profile.html">User Profile</a>
+            <a href="testimonials.html">Testimonials</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>User Profile</h2>
+        <p>Name: <strong id="userName"></strong></p>
+        <p>Email: <strong id="userEmail"></strong></p>
+
+        <div class="bookings">
+            <h3>Booked Classes</h3>
+            <ul id="bookedList"></ul>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        // Get current user from localStorage
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userEmail').textContent = currentUser.email;
+        } else {
+            document.getElementById('userName').textContent = "Guest";
+            document.getElementById('userEmail').textContent = "-";
+        }
+
+        // Example booked classes (you can extend dynamically)
+        const booked = [
+            "Adaptive Yoga - Monday 8 AM",
+            "Dance - Wednesday 6 PM",
+            "Pilates - Sunday 6 PM"
+        ];
+        const ul = document.getElementById('bookedList');
+        booked.forEach(bk => {
+            const li = document.createElement('li');
+            li.textContent = bk;
+            ul.appendChild(li);
+        });
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('currentUser');
+            alert('You have been logged out.');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+</body>
+
+</html>

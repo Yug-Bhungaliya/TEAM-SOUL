@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainers - Inclusive Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #f0f4f8;
+            color: #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+        }
+
+        nav a {
+            margin: 0 12px;
+            color: white;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            transform: scale(1.05);
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 35px;
+        }
+
+        .trainer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .trainer-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .trainer-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .trainer-card-content {
+            padding: 18px;
+            text-align: center;
+        }
+
+        .trainer-card-content h3 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .trainer-card-content p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .trainer-card-content button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #ff6a00, #ff8c42);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .trainer-card-content button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Inclusive Fitness</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="trainers.html">Trainers</a>
+            <a href="accessibility.html">Accessibility</a>
+            <a href="about.html">About</a>
+            <a href="user-profile.html">User Profile</a>
+            <a href="testimonials.html">Testimonials</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 style="text-align:center;color:#4facfe;margin-bottom:25px;">Our Trainers</h2>
+        <div class="trainer-grid" id="trainerGrid"></div>
+    </div>
+
+    <script>
+        const trainers = {
+            "Alice Johnson": { specialization: "Adaptive Yoga", experience: "5 years", img: "./images/trainer1.png" },
+            "Bob Smith": { specialization: "Gym & Strength", experience: "7 years", img: "./images/trainer2.png" },
+            "Clara Lee": { specialization: "Dance & Fitness", experience: "6 years", img: "./images/trainer3.png" },
+            "David Kim": { specialization: "Pilates & Rehab", experience: "8 years", img: "./images/trainer4.png" }
+        };
+
+        const grid = document.getElementById('trainerGrid');
+        for (const name in trainers) {
+            const t = trainers[name];
+            const card = document.createElement('div');
+            card.className = 'trainer-card';
+            card.innerHTML = `<img src="${t.img}" alt="${name}">
+<div class="trainer-card-content">
+<h3>${name}</h3>
+<p>${t.specialization}</p>
+<p>Experience: ${t.experience}</p>
+<button onclick="viewProfile('${name}')">View Profile</button>
+</div>`;
+            grid.appendChild(card);
+        }
+        function viewProfile(name) { window.location.href = `trainer-profile.html?trainer=${encodeURIComponent(name)}`; }
+    </script>
+
+</body>
+
+</html>
